@@ -4,7 +4,7 @@
       class="image selectable-image"
       :src="src"
       alt="Some Image"
-      @click="handleClick"
+      @click.native="handleClick"
       ></b-image>
 </template>
 
@@ -25,7 +25,7 @@ export default class SelectableImage extends Vue {
 
 <style lang="scss" scoped>
 @import '@/styles/variables';
-.selectable-image {
+.selectable-image:hover {
   border: 2px $primary solid;
   cursor: pointer;
 }
