@@ -2,7 +2,7 @@
   <b-field>
     <b-button
       type="is-primary"
-      icon-left="paper-plane"
+      :icon-left="icon"
       @click="$emit('click')"
       :disabled="disabled"
       :loading="loading"
@@ -20,5 +20,6 @@ export default class SubmitButton extends Vue {
   @Prop(Boolean) public disabled!: boolean
   @Prop(Boolean) public loading!: boolean
   @Prop(String) public label!: string
+  @Prop({ type: String, default: 'paper-plane' }) public icon!: string
 }
 </script>
