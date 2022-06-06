@@ -84,6 +84,14 @@
               {{ $t('creative') }}
             </b-navbar-item>
           </b-tooltip>
+          <b-tooltip
+            label="Full generative NFT"
+            position="is-right"
+            append-to-body>
+            <b-navbar-item tag="nuxt-link" :to="`/${urlPrefix}/dalle`">
+              {{ $t('dalle') }}
+            </b-navbar-item>
+          </b-tooltip>
         </template>
       </b-navbar-dropdown>
       <b-navbar-item tag="nuxt-link" :to="`/${urlPrefix}/explore`">
