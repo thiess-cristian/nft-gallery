@@ -17,7 +17,6 @@
 
       <BasicInput
           v-model="prompt"
-          key="name"
           :label="$t('mint.nft.prompt.label')"
           :message="$t('mint.nft.prompt.message')"
           :placeholder="$t('mint.nft.prompt.placeholder')"
@@ -25,19 +24,41 @@
           spellcheck="true"
         />
 
-      <ImageGrid :images="images" />
-
-      <!-- <BalanceInput :step="0.1" @input="updateMeta" label="Price" expanded />
-      <div class="content mt-3">
-        <p>
-          Hint: Setting the price now requires making an additional transaction.
-        </p>
-      </div> -->
-
       <SubmitButton
         label="mint.ask"
         :disabled="!prompt"
         @click="ask" />
+
+      <ImageGrid :images="images" @update="updateSelectedImages" />
+
+      <template v-if="images.length">
+
+      <BasicInput
+          v-model="rmrkMint.name"
+          :label="$t('mint.nft.name.label')"
+          :message="$t('mint.nft.name.message')"
+          :placeholder="$t('mint.nft.name.placeholder')"
+          expanded
+          spellcheck="true"
+        />
+
+      <LabeledText label="mint.nft.description.label" >
+        {{ rmrkMint.description }}
+      </LabeledText>
+
+      <LabeledText label="mint.nft.count.label" >
+        {{ selectedImages.length }}
+      </LabeledText>
+
+      <SubmitButton
+        label="mint.submit"
+        class="mt-4"
+        :disabled="disabled"
+        :loading="isLoading"
+        @click="sub" />
+
+      </template>
+
     </div>
   </section>
 </template>
@@ -73,6 +94,7 @@ import {
 import { MediaType } from '../types'
 import { resolveMedia, sanitizeIpfsUrl } from '../utils'
 import { askDalleMini } from '@/utils/dalle'
+import { asBase64Image } from '~/utils/url'
 
 const components = {
   AuthField: () => import('@/components/shared/form/AuthField.vue'),
@@ -97,7 +119,7 @@ export default class CreativeMint extends mixins(
     ...emptyObject<SimpleNFT>(),
     max: 1,
     symbol: makeSymbol(),
-    name: '~',
+    name: '',
     description: '~'
   }
   private meta: NFTMetadata = emptyObject<NFTMetadata>()
@@ -106,6 +128,7 @@ export default class CreativeMint extends mixins(
   private fileHash = ''
   private isGptLoading = false
   private images: string[] = []
+  private selectedImages: number[] = []
   private prompt = ''
 
   protected updateMeta(value: number): void {
@@ -127,11 +150,20 @@ export default class CreativeMint extends mixins(
 
   get disabled(): boolean {
     const { name, symbol, max } = this.rmrkMint
-    return !(name && symbol && max && this.accountId && this.file)
+    return !(name && symbol && max && this.accountId)
+  }
+
+  protected updateSelectedImages(images: number[]): void {
+    this.selectedImages = images
   }
 
   protected async ask(): Promise<void> {
-    this.images = await askDalleMini(this.prompt).then(res => res.images)
+    this.selectedImages = []
+    this.images = []
+    this.images = await askDalleMini(this.prompt).then(res => res.images.map(asBase64Image))
+    this.rmrkMint.description = `Prompt for DALLE "${this.prompt}"\n
+    Generated with love by KodaDot
+    `
   }
 
   protected async sub(): Promise<void> {
