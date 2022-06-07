@@ -7,7 +7,7 @@ export const isUrl = (url: string): boolean => {
   }
 }
 
-export const asBase64Image = (url: string, mimeType = 'image/png'): string => {
+export const asBase64Image = (url: string): string => {
   return `data:image/png;base64,${url}`
 }
 
