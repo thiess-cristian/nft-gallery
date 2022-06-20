@@ -10,7 +10,7 @@
           nft.collectionId || nft.collection.id
         }`"
         v-show="!isLoading">
-        {{ nft.collection.name }}
+        {{ nft.collection.name || nft.collection.id }}
       </nuxt-link>
       <b-skeleton :active="isLoading"></b-skeleton>
     </p>
