@@ -5,9 +5,16 @@ export type Offer = {
   price: string
 }
 
-export type OfferResponse = {
-  offers: Offer[]
+export type OfferResponse<T = Offer> = {
+  offers: T[]
   stats: {
     total: number
+  }
+}
+
+export type CollectionOffer = Offer & {
+  nft: {
+    id: string
+    name: string
   }
 }

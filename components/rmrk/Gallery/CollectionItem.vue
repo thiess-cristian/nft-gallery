@@ -122,6 +122,14 @@
           openOnDefault
           hideCollapse />
       </b-tab-item>
+      <b-tab-item v-if="urlPrefix === 'bsx'" label="Offers" value="offers">
+        KEEEK
+        <!-- <Flipper
+          v-if="!isLoading && activeTab === 'flippers'"
+          :events="ownerEventsOfNftCollection"
+          openOnDefault
+          hideCollapse /> -->
+      </b-tab-item>
     </b-tabs>
   </section>
 </template>
@@ -158,6 +166,7 @@ import {
 } from '../utils'
 import { SearchQuery } from './Search/types'
 import { isSameAccount } from '~/utils/account'
+import { CollectionOffer } from '~/components/bsx/Offer/types'
 
 const tabsWithCollectionEvents = ['history', 'holders', 'flippers']
 
@@ -224,6 +233,7 @@ export default class CollectionItem extends mixins(
   private openHolder = true
   private isLoading = true
   private nfts: NFT[] = []
+  private offers: CollectionOffer[] = []
 
   collectionProfileSortOption: string[] = [
     'EMOTES_COUNT_DESC',
@@ -285,7 +295,11 @@ export default class CollectionItem extends mixins(
   }
 
   get isOwner() {
-    return isSameAccount(this.collection.issuer, this.accountId)
+    return (
+      this.collection.issuer &&
+      this.accountId &&
+      isSameAccount(this.collection.issuer, this.accountId)
+    )
   }
 
   private buildSearchParam(checkForEmpty?): Record<string, unknown>[] {

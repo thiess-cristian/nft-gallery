@@ -1,5 +1,7 @@
 <template>
   <b-table :data="offers">
+    <slot name="front"></slot>
+
     <b-table-column
       cell-class="is-vcentered"
       field="caller"
@@ -27,6 +29,7 @@
       sortable>
       {{ props.row.expiration }}
     </b-table-column>
+    <slot name="back"></slot>
     <b-table-column
       cell-class="is-vcentered"
       :label="$t('offer.action')"
