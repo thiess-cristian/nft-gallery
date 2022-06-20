@@ -1,0 +1,19 @@
+query offerListByCollectionId($id: ID!) {
+  offers(where: { nft: { collection: { id_eq: $id } }, status_eq: ACTIVE }) {
+    id
+    caller
+    expiration
+    price
+    status
+    nft {
+      id
+      name
+    }
+  }
+  stats: offersConnection(
+    orderBy: id_ASC
+    where: { nft: { collection: { id_eq: $id } }, status_eq: ACTIVE }
+  ) {
+    total: totalCount
+  }
+}
