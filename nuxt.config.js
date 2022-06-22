@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from '@nuxt/bridge'
+import { resolve } from 'path'
 
 import defineApolloConfig, {
   toApolloEndpoint,
@@ -11,6 +12,7 @@ const baseUrl = process.env.BASE_URL || 'http://localhost:9090'
 export default defineNuxtConfig({
   alias: {
     tslib: 'tslib/tslib.es6.js',
+    // 'remove-hashbag-loader': resolve(__dirname, './loaders/remove-hashbag-loader')
   },
 
   vue: {
@@ -285,6 +287,7 @@ export default defineNuxtConfig({
       '@polkadot/ui-settings',
       '@polkadot/hw-ledger',
       '@polkadot/types-codec',
+      '@polkadot/wasm-bridge',
       '@google/model-viewer', // TODO check to see if it works without transpilation in future nuxt releases
     ],
     extend(config) {
