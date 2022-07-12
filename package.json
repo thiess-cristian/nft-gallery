@@ -93,7 +93,7 @@
     "setimmediate": "^1.0.5",
     "slugify": "^1.6.5",
     "v-emoji-picker": "^2.3.3",
-    "vue": "^2.6.14",
+    "vue": "^2.7.4",
     "vue-apollo": "^3.1.0",
     "vue-audio-visual": "^2.5.0",
     "vue-class-component": "^7.2.6",
@@ -121,8 +121,8 @@
     "@open-wc/webpack-import-meta-loader": "^0.4.7",
     "@types/jest": "^27.5.2",
     "@types/markdown-it": "^12.2.3",
-    "@typescript-eslint/eslint-plugin": "^5.30.5",
-    "@typescript-eslint/parser": "^5.30.5",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
     "all-contributors-cli": "^6.20.0",
     "consola": "^2.15.3",
     "eslint": "^8.19.0",
@@ -139,7 +139,7 @@
     "sass": "^1.53.0",
     "sass-loader": "^10.3",
     "typescript": "^4.7.4",
-    "vitest": "^0.17.1",
+    "vitest": "^0.18.0",
     "vue-debounce-decorator": "^1.0.1"
   }
 }
