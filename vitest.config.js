@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config'
 import { resolve } from 'path'
+import { createVuePlugin as vue } from 'vite-plugin-vue2'
 
 export default defineConfig({
   test: {
@@ -13,6 +14,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
   },
+  plugins: [vue()],
   resolve: {
     alias: {
       '@': resolve(__dirname, './'),
