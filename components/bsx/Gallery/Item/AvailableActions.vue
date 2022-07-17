@@ -76,7 +76,7 @@ export default class AvailableActions extends mixins(
   public minimumOfferAmount = 0
   public isMakeOffersDisabled = true
   public isBalanceInputValid = false
-  public tooltipOfferLabel = this.$t('tooltip.makeOfferDisabled')
+  public tooltipOfferLabel = '' //this.$t('tooltip.makeOfferDisabled')
 
   get balance(): number {
     return this.formatBalance(this.$store.getters.getAuthBalance)
